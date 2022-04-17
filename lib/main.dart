@@ -1,40 +1,52 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  void questions() {
-    print('What is your name?');
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
   }
+}
 
-  var questions_ = [
-    'What is your name?',
-    'What is your favorite color?',
-    'What is your favorite animal?',
-  ];
+class _MyAppState extends State<MyApp> {
+  var test_ = 0;
+  void answerQuestion() {
+    setState(() {
+      if (test_ == 2) {
+        test_ = 0;
+      } else {
+        test_ = test_ + 1;
+      }
+    });
+    print(test_);
+  }
 
   @override
   Widget build(BuildContext context) {
+    var question = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?',
+      'What\'s your favorite food?',
+    ];
     return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: Question(question[test_]),
         ),
-        body: Column(
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: questions,
-              child: const Text('Questions'),
-            ),
-          ],
-        ),
-        bottomNavigationBar: FloatingActionButton(
-          onPressed: questions,
-          child: const Icon(Icons.add),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: answerQuestion, child: Question(question[test_])),
+            ],
+          ),
         ),
       ),
     );
