@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() {
     return _MyAppState();
@@ -22,7 +21,6 @@ class _MyAppState extends State<MyApp> {
         test_ = test_ + 1;
       }
     });
-    print(test_);
   }
 
   @override
@@ -35,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -45,8 +43,7 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ElevatedButton(
-                  onPressed: answerQuestion, child: Question(question[test_])),
+              Answer(answerQuestion, question[test_]),
             ],
           ),
         ),
